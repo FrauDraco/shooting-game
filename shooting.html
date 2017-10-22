@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+
+<div></div>
+
+<style>
+
+html { 
+  background: url(https://image.freepik.com/free-vector/polka-dot-background_1069-54.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.p-background {
+	background-color: rgba(225, 225, 225, 0.5);
+	width: 100%;
+}
+
+#muffin {
+	position: absolute;
+	width: 120px;
+	height: 120px;
+	top: 410px;
+	left: 550px;
+}	
+
+</style>
+<body>
+<div class="p-background">
+<p>This is a shooting game; you are about to kick the football</p>
+<p>The goalie is left-handed or right-handed (TIP: find that and improve your mark, you can invite your friend to play it :D)</p>
+<p>YOU HAVE ONLY 10 CHANCES!!!</p>
+<p>Which side are you going to shoot?</p>
+</div>
+
+<div>
+<img id="muffin" src="http://images.all-free-download.com/images/graphiclarge/muffin_clip_art_13655.jpg"/>
+</div>
+
+
+<button onclick="shootingLeft()">Left</button>
+<button onclick="shootingRight()">Right</button>
+
+
+
+
+
+<p id="1"></p>
+<p id="2"></p>
+<p id="3"></p>
+<p id="4"></p>
+<p id="5"></p>
+<p id="6"></p>
+<p id="7"></p>
+<p id="8"></p>
+<p id="9"></p>
+<p id="10"></p>
+<p id="gameover"></p>
+
+</body>
+<script>
+
+var round = 1;
+var points = 0;
+
+function shootingLeft() {
+    var ran = Math.random();
+    if (ran < 0.3) {
+        document.getElementById(round).innerHTML = "ROUND " + round + " L:succeed";
+        points++;
+    } else {
+        document.getElementById(round).innerHTML = "ROUND " + round + " L:fail";
+    }
+    round++;
+    if (round == 11) document.getElementById("gameover").innerHTML = "Game over! You got " + points + " marks";
+}
+
+function shootingRight() {
+    var ran = Math.random();
+    if (ran < 0.7) {
+        document.getElementById(round).innerHTML = "ROUND " + round + " R:succeed";
+        mark++;
+    } else {
+        document.getElementById(round).innerHTML = "ROUND " + round + " R:fail";
+    }
+    round++;
+    if (round == 11) document.getElementById("gameover").innerHTML = "Game over! You got " + points + " marks";
+}
+
+
+</script>
+
+</html>
+
