@@ -2,95 +2,175 @@
 
 <html>
 
-<div></div>
+<head>
+  <title>Shooting Game</title>
+</head>
+
+<body>
 
 <style>
 
-html { 
-  background: url(https://image.freepik.com/free-vector/polka-dot-background_1069-54.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-.p-background {
-  background-color: rgba(225, 225, 225, 0.5);
-  width: 100%;
+#background {
+  position:absolute;
+  top:5px;
+  width:750px;
+  height:500px;
 }
 
-#muffin {
+#board {
+  position:absolute;
+  width:5000px;
+  height:300px;
+}
+
+#sun {
   position: absolute;
-  width: 120px;
-  height: 120px;
+  width: 200px;
+  height: 200px;
   top: 410px;
-  left: 550px;
+  left: 300px;
 } 
 
+#score {
+  background-color: #D3D3D3;
+  height:50px;
+  width:140px;
+  top:10px;
+  left:640px;
+  font-family: "Times New Roman", Times;
+  font-size:50px;
+  text-align: center;
+}
+
+#rules {
+  position:absolute;
+  top:20px;
+  left:850px;
+  width:400px;
+  background-color: #D3D3D3;
+  font-size: 1em;
+}
+
+h1 {
+  font-size: 30px;
+  font-family: "Times New Roman", Times;
+  text-align: justify-all;
+}
+
+p {
+  font-size: 20px;
+  font-family: "Times New Roman", Times;
+  text-align: justify-all;
+}  
+
+#clouds {
+  position:absolute;
+  width:200px;
+  top:30px;
+  left:310px;
+}
+
 </style>
-<body>
-<div class="p-background">
-<p>This is a shooting game; you are about to kick the football</p>
-<p>The goalie is left-handed or right-handed (TIP: find that and improve your mark, you can invite your friend to play it :D)</p>
-<p>YOU HAVE ONLY 10 CHANCES!!!</p>
-<p>Which side are you going to shoot?</p>
-</div>
 
-<div>
-<img id="muffin" src="http://images.all-free-download.com/images/graphiclarge/muffin_clip_art_13655.jpg"/>
-</div>
+    <div id="board">
+        <img id="background" src="https://www.emnify.com/wp-content/uploads/2015/11/Blog-Berlin-move.jpg"/>
+        <img id="clouds" src="http://moziru.com/images/clouds-clipart-3.png"/>
+        <div id="score" style="position:absolute;">Score</div>
+    </div>
+    
+    <div id="sun">
+        <img src="http://www.clker.com/cliparts/g/b/u/I/d/4/a-sun-cartoon-with-a-long-ray-md.png"/>
+    </div>
+
+    <div id="rules" style="position:absolute;">
+
+        <h1>Simple Shooter Game</h1>
+
+        <p>This is a shooting game!</p>
+        <p>You are about to shoot the sun at the Berlin!</p>
+        <p>The cloud is left-handed or right-handed.
+            <p>
+                <p>YOU ONLY HAVE 10 CHANCES!!!</p>
+                <p>Which side are you going to shoot?</p>
+                <p>Have fun!!!</p>
+
+                <button type="button" onclick = "shootLeft()" style="top:400px; left:100px;">Shoot left</button>
+                <button type="button" onclick = "shootRight()" style="top:400px; left:200px;">Shoot right</button>
+
+                <div>
+                        <p id="1"></p>
+                        <p id="2"></p>
+                        <p id="3"></p>
+                        <p id="4"></p>
+                        <p id="5"></p>
+                        <p id="6"></p>
+                        <p id="7"></p>
+                        <p id="8"></p>
+                        <p id="9"></p>
+                        <p id="10"></p>
+                        <p id="gameover"></p>
+                </div>
+
+    </div>
 
 
-<button onclick="shootingLeft()">Left</button>
-<button onclick="shootingRight()">Right</button>
-
-
-
-
-
-<p id="1"></p>
-<p id="2"></p>
-<p id="3"></p>
-<p id="4"></p>
-<p id="5"></p>
-<p id="6"></p>
-<p id="7"></p>
-<p id="8"></p>
-<p id="9"></p>
-<p id="10"></p>
-<p id="gameover"></p>
-
-</body>
 <script>
 
 var round = 1;
-var points = 0;
+var score = 0;
+document.getElementById("score").innerHTML = "0";
+var animate;
+var sun = document.getElementById("sun");
 
-function shootingLeft() {
+function shootLeft() {
     var ran = Math.random();
-    if (ran < 0.3) {
-        document.getElementById(round).innerHTML = "ROUND " + round + " L:succeed";
-        points++;
+    
+    while (parseInt(sun.style.top) != 300) {
+        sun.style.left = parseInt(sun.style.left) - 1 + "px";
+        sun.style.top = parseInt(sun.style.top) - 1 + "px";
+        animate = setTimeout(shootLeft,20);
+    }
+    if (ran > 0.3) {
+        score = score + 1;
+        document.getElementById("score").innerHTML = score;
     } else {
-        document.getElementById(round).innerHTML = "ROUND " + round + " L:fail";
+        document.getElementById("score").innerHTML = score;
     }
     round++;
-    if (round == 11) document.getElementById("gameover").innerHTML = "Game over! You got " + points + " marks";
+    if (round == 10) {
+        document.getElementById("gameover").innerHTML = "Game over! You got " + score + " points";
+    }
+
+    sun.style.left = "300px";
+    sun.style.top = "410px";
 }
 
-function shootingRight() {
+function shootRight() {
     var ran = Math.random();
-    if (ran < 0.7) {
-        document.getElementById(round).innerHTML = "ROUND " + round + " R:succeed";
-        mark++;
+    
+    while (parseInt(sun.style.top) != 300) {
+        sun.style.left = parseInt(sun.style.left) + 1 + "px";
+        sun.style.top = parseInt(sun.style.top) - 1 + "px";
+        animate = setTimeout(shootRight,20);
+    }
+    if (ran > 0.7) {
+        score = score + 1;
+        document.getElementById("score").innerHTML = score;
     } else {
-        document.getElementById(round).innerHTML = "ROUND " + round + " R:fail";
+        document.getElementById("score").innerHTML = score;
     }
     round++;
-    if (round == 11) document.getElementById("gameover").innerHTML = "Game over! You got " + points + " marks";
+    if (round == 10) {
+        document.getElementById("gameover").innerHTML = "Game over! You got " + score + " points";
+    }
+    sun.style.left = "300px";
+    sun.style.top = "410px";
 }
 
+      </script>
 
-</script>
+    </body>
 
 </html>
+
 
